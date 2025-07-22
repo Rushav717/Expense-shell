@@ -18,6 +18,7 @@ VALIDATE(){
       exit1
     else
       echo -e "$2 ... $G Success $N"
+    fi
 }
 
 
