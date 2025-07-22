@@ -34,28 +34,31 @@ echo "Script Started excecuted at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOG_FILE_NAME 
 VALIDATE $? "Disabling existing nodejs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling the nodejs 20"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing the NodeJS 20"
 
-useradd expense
+useradd expense &>>$LOG_FILE_NAME
 VALIDATE $? "Adding the User"
 
-mkdir /app
+mkdir /app &>>$LOG_FILE_NAME
 VALIDATE $? "Creating the app directory"
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE_NAME
 VALIDATE $? "Downloading the Backend code"
 
 cd /app
 
-npm install
-VALIDATE $? "Installing dependecies"
+unzip /tmp/backend.zip &>>$LOG_FILE_NAME
+VALIDATE $? "Unzipping backend"
+
+npm install &>>$LOG_FILE_NAME
+VALIDATE $? "Installing dependencies"
 
 cp /home/ec2-user/Expense-shell/backend.service /etc/systemd/system/backend.service
 
@@ -64,17 +67,17 @@ cp /home/ec2-user/Expense-shell/backend.service /etc/systemd/system/backend.serv
 dnf install mysql -y &>> $LOG_FILE_NAME
 VALIDATE $? "Installing mysql client"
 
-mysql -h mysql.rushhav.fun -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h mysql.rushhav.fun -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE_NAME
 VALIDATE $? "Settimg up the transaction Schema & Tables"
 
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE_NAME
 VALIDATE $? "Daemon reload"
 
-systemctl start backend
+systemctl start backend &>>$LOG_FILE_NAME
 VALIDATE $? "Start the backend"
-
-systemctl enable backend
+ 
+systemctl enable backend &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling the backend"
 
 
