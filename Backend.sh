@@ -50,10 +50,7 @@ then
  VALIDATE $? "Adding the User"
 else
  echo -e "Expense User already exists .... $Y skipping $N"
-fi 
-
-mkdir /app &>>$LOG_FILE_NAME
-VALIDATE $? "Creating the app directory"
+fi
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE_NAME
 VALIDATE $? "Downloading the Backend code"
