@@ -9,7 +9,7 @@ N="\e[0m"
 LOG_FOLDER="/var/log/expense-logs"
 LOG_FILE=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%Y-%m-%d-%T)
-LOG_FILE_NAME="$LOG_FOLDER|$LOG_FILE-$TIMESTAMP.log"
+LOG_FILE_NAME="$LOG_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 VALIDATE(){
     if [ $1 -ne 0 ]
