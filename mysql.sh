@@ -11,19 +11,17 @@ LOG_FILE=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%Y-%m-%d-%T)
 LOG_FILE_NAME="$LOG_FOLDER|$LOG_FILE-$TIMESTAMP.log"
 
-VALIDATE()
-{
- if [ $! -ne 0 ]
- then
-  echo -e "$2 ... $R FAILURE $N"
-  exit1
- else
-  echo -e "$2 ... $G Success $N"
+VALIDATE(){
+    if [ $! -ne 0 ]
+    then
+      echo -e "$2 ... $R FAILURE $N"
+      exit1
+    else
+      echo -e "$2 ... $G Success $N"
 }
 
 
-CHECK_ROOT()
-{
+CHECK_ROOT(){
     if [ $USERID -ne 0 ]
     then
       echo "ERROR:: Sudo access is Required to execute the script"
