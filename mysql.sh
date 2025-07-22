@@ -43,7 +43,7 @@ VALIDATE $? "Enabling Mysql server"
 systemctl start mysqld &>>$LOG_FILE_NAME
 VALIDATE $? "Starting Mysql server"
 
-mysql -h mysql.rushhav.fun -u root -pExpenseApp@1 -e 'Show databases';
+mysql -h mysql.rushhav.fun -u root -pExpenseApp@1 -e 'Show databases'; &>>$LOG_FILE_NAME
 if [ $? -ne 0 ]
 then
   echo "Root password not setup" &>>$LOG_FILE_NAME
