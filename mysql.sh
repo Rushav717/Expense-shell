@@ -12,7 +12,7 @@ TIMESTAMP=$(date +%Y-%m-%d-%T)
 LOG_FILE_NAME="$LOG_FOLDER|$LOG_FILE-$TIMESTAMP.log"
 
 VALIDATE(){
-    if [ $! -ne 0 ]
+    if [ $1 -ne 0 ]
     then
       echo -e "$2 ... $R FAILURE $N"
       exit 1
