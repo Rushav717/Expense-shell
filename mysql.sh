@@ -14,7 +14,7 @@ LOG_FILE_NAME="$LOG_FOLDER|$LOG_FILE-$TIMESTAMP.log"
 
 CHECK_ROOT()
 {
-    if [ id -ne 0 ]
+    if [ $USERID -ne 0 ]
     then
       echo "ERROR:: Sudo access is Required to execute the script"
       exit 1
