@@ -44,8 +44,7 @@ systemctl start mysqld &>>$LOG_FILE_NAME
 VALIDATE $? "Starting Mysql server"
 
 mysql -h mysql.rushhav.fun -u root -pExpenseApp@1 -e 'Show databases';
-
-if[ $? -ne 0 ]
+if [ $? -ne 0 ]
 then
   echo "Root password not setup" &>>$LOG_FILE_NAME
   mysql_secure_installation --set-root-pass ExpenseApp@1 
